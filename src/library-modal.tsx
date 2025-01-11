@@ -188,7 +188,7 @@ export const LibraryModal = () => {
 
                 <Table.Body>
                   {libData.map((data) => {
-                    const iconPath = `./src/assets/Icons/File type=${
+                    const iconPath = `./assets/Icons/File type=${
                       data.type
                     }/${data.fileType.toUpperCase()}, Type=Default.svg`;
 
