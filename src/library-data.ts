@@ -74,8 +74,8 @@ export const libraryData = [
   {
     id: "161718",
     name: "Dashboard interaction",
-    type: "Simple",
-    fileType: "Code",
+    type: "Development",
+    fileType: "JSON",
     status: 1,
     created_at: "05/01/2024",
     created_by: {
@@ -86,8 +86,8 @@ export const libraryData = [
   {
     id: "192012132",
     name: "Dashboard interaction",
-    type: "Simple",
-    fileType: "Code",
+    type: "Archive",
+    fileType: "RAR",
     status: 1,
     created_at: "05/01/2024",
     created_by: {
@@ -98,8 +98,8 @@ export const libraryData = [
   {
     id: "192021082734",
     name: "Dashboard interaction",
-    type: "Simple",
-    fileType: "Code",
+    type: "Media",
+    fileType: "AVI",
     status: 1,
     created_at: "05/01/2024",
     created_by: {
@@ -111,7 +111,7 @@ export const libraryData = [
     id: "192021783",
     name: "Dashboard interaction",
     type: "Simple",
-    fileType: "Code",
+    fileType: "PDF",
     status: 1,
     created_at: "05/01/2024",
     created_by: {
