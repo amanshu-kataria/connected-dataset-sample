@@ -1,12 +1,5 @@
-import {
-  Button,
-  Checkbox,
-  Dialog,
-  IconButton,
-  Table,
-  Text,
-} from "@radix-ui/themes";
-import { Status, StatusChip, TextInput } from "./components";
+import { Button, Dialog, IconButton, Table, Text } from "@radix-ui/themes";
+import { CustomCheckbox, Status, StatusChip, TextInput } from "./components";
 import { useForm } from "react-hook-form";
 import {
   ArrowRightIcon,
@@ -16,14 +9,17 @@ import {
 } from "@radix-ui/react-icons";
 import { libraryData } from "./library-data";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 const borderColor = "#E4E7EC";
 
 const tableCellStyle = {
   display: "flex",
-  gap: "6px",
+  gap: "12px",
   height: "100%",
   alignItems: "center",
+  fontWeight: 500,
+  fontSize: "12px",
 };
 
 interface GetLabelStatusReturn {
@@ -132,10 +128,17 @@ export const LibraryModal = () => {
                 padding: "16px 16px 0px",
               }}
             >
-              <Dialog.Title style={{ display: "flex", alignItems: "center" }}>
+              <Dialog.Title
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  fontWeight: 600,
+                  fontSize: "18px",
+                }}
+              >
                 Library
                 <IconButton variant="ghost" style={{ marginLeft: "auto" }}>
-                  <Cross2Icon />
+                  <Cross2Icon color="#d0d5dd" />
                 </IconButton>
               </Dialog.Title>
               <Dialog.Description size="2" mb="4">
@@ -150,14 +153,14 @@ export const LibraryModal = () => {
               type="text"
               inputProps={register("search", {})}
               size="small"
-              style={{ width: "200px", margin: "16px" }}
-              icon={<MagnifyingGlassIcon />}
+              style={{ width: "260px", margin: "16px 16px 8px" }}
+              icon={<MagnifyingGlassIcon color="#667085" />}
               onInputChange={(e) => onFilterData(e.target.value)}
             />
 
             <div
               style={{
-                padding: "16px 16px 0px",
+                padding: "0px 16px 0px",
                 flex: 1,
                 height: "400px",
                 overflowY: "scroll",
@@ -173,16 +176,31 @@ export const LibraryModal = () => {
                 <Table.Header>
                   <Table.Row>
                     <Table.ColumnHeaderCell style={tableCellStyle}>
-                      <Checkbox
-                        checked={allChecked}
-                        onCheckedChange={selectAllRows}
+                      <CustomCheckbox
+                        isChecked={allChecked}
+                        onChange={selectAllRows}
+                        variant="secondary"
                       />
                       Dataset Name
                     </Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>Created at</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell>Created by</Table.ColumnHeaderCell>
-                    <Table.ColumnHeaderCell></Table.ColumnHeaderCell>
+                    <Table.ColumnHeaderCell
+                      style={{ fontWeight: 500, fontSize: "12px" }}
+                    >
+                      Status
+                    </Table.ColumnHeaderCell>
+                    <Table.ColumnHeaderCell
+                      style={{ fontWeight: 500, fontSize: "12px" }}
+                    >
+                      Created at
+                    </Table.ColumnHeaderCell>
+                    <Table.ColumnHeaderCell
+                      style={{ fontWeight: 500, fontSize: "12px" }}
+                    >
+                      Created by
+                    </Table.ColumnHeaderCell>
+                    <Table.ColumnHeaderCell
+                      style={{ fontWeight: 500, fontSize: "12px" }}
+                    ></Table.ColumnHeaderCell>
                   </Table.Row>
                 </Table.Header>
 
@@ -193,6 +211,7 @@ export const LibraryModal = () => {
                     }/${data.fileType.toUpperCase()}, Type=Default.svg`;
 
                     const label = getLabelStatus(data.status);
+                    const date = dayjs(data.created_at).format("MMM D, YYYY");
 
                     return (
                       <Table.Row
@@ -204,25 +223,25 @@ export const LibraryModal = () => {
                         <Table.RowHeaderCell
                           style={{
                             display: "flex",
-                            gap: "6px",
+                            gap: "12px",
                             height: "100%",
                             alignItems: "center",
                           }}
                         >
-                          <Checkbox
-                            checked={checkedItems.has(data.id)}
-                            onCheckedChange={(val) =>
-                              onRowSelected(val as boolean, data.id)
-                            }
+                          <CustomCheckbox
+                            isChecked={checkedItems.has(data.id)}
+                            onChange={(val) => onRowSelected(val, data.id)}
                           />
-                          <img src={iconPath} height={"20px"} />
-                          <span>{data.name}</span>
+                          <img src={iconPath} height={"32px"} />
+                          <span style={{ fontWeight: 400 }}>
+                            {data.name}.{data.fileType.toLowerCase()}
+                          </span>
                         </Table.RowHeaderCell>
                         <Table.Cell style={{ verticalAlign: "middle" }}>
                           <StatusChip label={label.label} type={label.type} />
                         </Table.Cell>
                         <Table.Cell style={{ verticalAlign: "middle" }}>
-                          {data.created_at}
+                          {date}
                         </Table.Cell>
                         <Table.Cell>
                           <div
@@ -237,7 +256,7 @@ export const LibraryModal = () => {
                         </Table.Cell>
                         <Table.Cell style={{ verticalAlign: "baseline" }}>
                           <IconButton variant="ghost">
-                            <TrashIcon />
+                            <TrashIcon className="icon-btn" />
                           </IconButton>
                         </Table.Cell>
                       </Table.Row>
@@ -252,8 +271,14 @@ export const LibraryModal = () => {
                 padding: "16px",
               }}
             >
-              <Button style={{ display: "flex", marginLeft: "auto" }}>
-                Next <ArrowRightIcon />
+              <Button
+                style={{
+                  display: "flex",
+                  marginLeft: "auto",
+                  backgroundColor: "#3882FF",
+                }}
+              >
+                Next <ArrowRightIcon color="white" />
               </Button>
             </div>
           </Dialog.Content>

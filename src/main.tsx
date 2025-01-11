@@ -9,6 +9,9 @@ import "@radix-ui/themes/styles.css";
 import "./theme.config.css";
 import { Library } from "./library.tsx";
 import AuthGuard from "./auth-guard.tsx";
+import dayjs from "dayjs";
+
+dayjs.locale("en-us");
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

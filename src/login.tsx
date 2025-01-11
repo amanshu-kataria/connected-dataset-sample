@@ -107,7 +107,12 @@ export const Login = () => {
 
             <Button
               size={"3"}
-              style={{ width: "100%", marginTop: "8px" }}
+              style={{
+                width: "100%",
+                marginTop: "8px",
+                backgroundColor: "#3882FF",
+                fontWeight: 600,
+              }}
               onClick={handleSubmit(onLogin)}
             >
               Sign In
@@ -124,7 +129,12 @@ export const Login = () => {
             <Button
               variant="outline"
               size={"3"}
-              style={{ width: "100%", marginTop: "24px" }}
+              style={{
+                width: "100%",
+                marginTop: "24px",
+                color: "#414651",
+                boxShadow: "inset 0 0 0 1px #D5D7DA",
+              }}
             >
               <GoogleIcon />
               Sign up with Google
@@ -133,14 +143,20 @@ export const Login = () => {
             <Button
               variant="outline"
               size={"3"}
-              style={{ width: "100%", marginTop: "16px" }}
+              style={{
+                width: "100%",
+                marginTop: "16px",
+                color: "#414651",
+                boxShadow: "inset 0 0 0 1px #D5D7DA",
+              }}
             >
               <LinkedinIcon />
               Sign up with LinkedIn
             </Button>
           </Container>
           <Text align={"center"} style={{ color: lightText }}>
-            Don't have an account? <Link> Sign up</Link>
+            Don't have an account?{" "}
+            <Link style={{ color: "#3882FF" }}> Sign up</Link>
           </Text>
         </Flex>
       </Section>
@@ -163,5 +179,6 @@ const loginStyles = {
     border: "1px solid #E4E7EC",
     borderRadius: "12px",
     padding: "32px 40px",
+    boxShadow: "0px 4px 6px -1px #0A0D121A",
   },
 };

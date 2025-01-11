@@ -1,0 +1,22 @@
+.custom-checkbox {
+  height: 20px;
+  width: 20px;
+}
+
+.custom-checkbox::before {
+  height: 20px;
+  width: 20px;
+  background-color: #3882ff;
+}
+
+.custom-checkbox[data-state="unchecked"]::before {
+  background-color: #ffffff;
+}
+
+.custom-checkbox > svg {
+  fill: #ffffff;
+}
+
+.secondary-checkbox::before {
+  background-color: #7f56d9;
+}

@@ -1,8 +1,13 @@
 * {
   box-sizing: border-box;
+  color: #182230;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+.icon-btn > path {
+  color: #98a2b3;
 }
