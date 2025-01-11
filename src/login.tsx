@@ -1,5 +1,4 @@
 import {
-  Box,
   Button,
   Container,
   Flex,
@@ -16,7 +15,6 @@ import GoogleIcon from "./assets/google.svg";
 import LinkedinIcon from "./assets/linkedin.svg";
 import ObviousLogo from "./assets/logo.svg";
 import { useNavigate } from "react-router";
-import { useState } from "react";
 
 interface SignInFields {
   email: string;
@@ -26,7 +24,6 @@ interface SignInFields {
 const lightText = "#535862";
 
 export const Login = () => {
-  const [error, setError] = useState("");
   const navigate = useNavigate();
   const {
     formState: { errors },

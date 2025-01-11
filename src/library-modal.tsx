@@ -62,6 +62,7 @@ const getLabelStatus = (status: number): GetLabelStatusReturn => {
 export const LibraryModal = () => {
   const [checkedItems, setCheckedItem] = useState(new Set());
   const [libData, setLibData] = useState(libraryData);
+  const [allChecked, setAllChecked] = useState(false);
 
   const { register } = useForm({
     defaultValues: {
@@ -79,6 +80,8 @@ export const LibraryModal = () => {
       });
     }
 
+    setAllChecked(libData.length > 0 && libData.length === newChecked.size);
+
     setCheckedItem(newChecked);
   };
 
@@ -94,6 +97,19 @@ export const LibraryModal = () => {
     );
   };
 
+  const onRowSelected = (value: boolean, id: string) => {
+    const newChecked = new Set(checkedItems);
+    if (value) {
+      newChecked.add(id);
+    } else {
+      newChecked.delete(id);
+    }
+
+    setCheckedItem(newChecked);
+
+    setAllChecked(libData.length > 0 && libData.length === newChecked.size);
+  };
+
   return (
     <main style={{ height: "100vh", width: "100vw", display: "flex" }}>
       <nav style={{ width: "100px" }}></nav>
@@ -101,10 +117,13 @@ export const LibraryModal = () => {
         <Dialog.Root open={true}>
           <Dialog.Content
             style={{
+              display: "flex",
+              flexDirection: "column",
               padding: 0,
               width: "content-fit",
               maxWidth: "80vw",
               height: "85vh",
+              overflowY: "hidden",
             }}
           >
             <header
@@ -125,20 +144,25 @@ export const LibraryModal = () => {
               </Dialog.Description>
             </header>
 
-            <div
-              style={{ padding: "16px 16px 0px", height: "calc(100% - 120px)" }}
-            >
-              <TextInput
-                label=""
-                placeholder="Search"
-                type="text"
-                inputProps={register("search", {})}
-                size="small"
-                style={{ width: "200px" }}
-                icon={<MagnifyingGlassIcon />}
-                onInputChange={(e) => onFilterData(e.target.value)}
-              />
+            <TextInput
+              label=""
+              placeholder="Search"
+              type="text"
+              inputProps={register("search", {})}
+              size="small"
+              style={{ width: "200px", margin: "16px" }}
+              icon={<MagnifyingGlassIcon />}
+              onInputChange={(e) => onFilterData(e.target.value)}
+            />
 
+            <div
+              style={{
+                padding: "16px 16px 0px",
+                flex: 1,
+                height: "400px",
+                overflowY: "scroll",
+              }}
+            >
               <Table.Root
                 style={{
                   border: `1px solid ${borderColor}`,
@@ -149,7 +173,11 @@ export const LibraryModal = () => {
                 <Table.Header>
                   <Table.Row>
                     <Table.ColumnHeaderCell style={tableCellStyle}>
-                      <Checkbox onCheckedChange={selectAllRows} /> Dataset Name
+                      <Checkbox
+                        checked={allChecked}
+                        onCheckedChange={selectAllRows}
+                      />
+                      Dataset Name
                     </Table.ColumnHeaderCell>
                     <Table.ColumnHeaderCell>Status</Table.ColumnHeaderCell>
                     <Table.ColumnHeaderCell>Created at</Table.ColumnHeaderCell>
@@ -158,7 +186,7 @@ export const LibraryModal = () => {
                   </Table.Row>
                 </Table.Header>
 
-                <Table.Body style={{ height: "80%" }}>
+                <Table.Body>
                   {libData.map((data) => {
                     const iconPath = `./src/assets/Icons/File type=${
                       data.type
@@ -183,18 +211,9 @@ export const LibraryModal = () => {
                         >
                           <Checkbox
                             checked={checkedItems.has(data.id)}
-                            onCheckedChange={(value) => {
-                              setCheckedItem((prev) => {
-                                const newSet = new Set(prev);
-                                if (value) {
-                                  newSet.add(data.id);
-                                } else {
-                                  newSet.delete(data.id);
-                                }
-
-                                return newSet;
-                              });
-                            }}
+                            onCheckedChange={(val) =>
+                              onRowSelected(val as boolean, data.id)
+                            }
                           />
                           <img src={iconPath} height={"20px"} />
                           <span>{data.name}</span>
@@ -226,17 +245,16 @@ export const LibraryModal = () => {
                   })}
                 </Table.Body>
               </Table.Root>
-              <div
-                style={{
-                  width: "100%",
-                  marginTop: "15px",
-                  marginBottom: "15px",
-                }}
-              >
-                <Button style={{ display: "flex", marginLeft: "auto" }}>
-                  Next <ArrowRightIcon />
-                </Button>
-              </div>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                padding: "16px",
+              }}
+            >
+              <Button style={{ display: "flex", marginLeft: "auto" }}>
+                Next <ArrowRightIcon />
+              </Button>
             </div>
           </Dialog.Content>
         </Dialog.Root>

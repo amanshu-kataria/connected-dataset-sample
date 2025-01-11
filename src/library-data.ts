@@ -48,6 +48,30 @@ export const libraryData = [
     },
   },
   {
+    id: "10111281818",
+    name: "UX Design Guidelines",
+    type: "Document",
+    fileType: "docx",
+    status: 1,
+    created_at: "03/01/2024",
+    created_by: {
+      name: "Demi Wilkinson",
+      email: "demi@untitledui.com",
+    },
+  },
+  {
+    id: "131415",
+    name: "Dashboard interaction",
+    type: "Archive",
+    fileType: "zip",
+    status: 1,
+    created_at: "05/01/2024",
+    created_by: {
+      name: "Natali Craig",
+      email: "natali@untitledui.com",
+    },
+  },
+  {
     id: "161718",
     name: "Dashboard interaction",
     type: "Simple",
@@ -60,7 +84,31 @@ export const libraryData = [
     },
   },
   {
-    id: "161719",
+    id: "192012132",
+    name: "Dashboard interaction",
+    type: "Simple",
+    fileType: "Code",
+    status: 1,
+    created_at: "05/01/2024",
+    created_by: {
+      name: "Natali Craig",
+      email: "natali@untitledui.com",
+    },
+  },
+  {
+    id: "192021082734",
+    name: "Dashboard interaction",
+    type: "Simple",
+    fileType: "Code",
+    status: 1,
+    created_at: "05/01/2024",
+    created_by: {
+      name: "Natali Craig",
+      email: "natali@untitledui.com",
+    },
+  },
+  {
+    id: "192021783",
     name: "Dashboard interaction",
     type: "Simple",
     fileType: "Code",
