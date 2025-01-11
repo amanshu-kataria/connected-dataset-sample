@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import { Theme } from "@radix-ui/themes";
 import { Login } from "./login.tsx";
 
@@ -15,6 +15,7 @@ createRoot(document.getElementById("root")!).render(
     <Theme radius="large">
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route element={<AuthGuard />}>
             <Route path="/library" element={<Library />} />
